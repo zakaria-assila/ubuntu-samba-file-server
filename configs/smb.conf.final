@@ -1,1 +1,56 @@
 
+[global]
+   workgroup = WORKGROUP
+   server string = UBU-FS01 Samba Server
+   security = user
+
+   # Logging
+   log file = /var/log/samba/log.%m
+   max log size = 1000
+
+   # Disable guest access (recommended)
+   map to guest = never
+
+   # SMB protocol (reasonable defaults)
+   server min protocol = SMB2
+   server max protocol = SMB3
+
+   # Optional: performance / reliability
+   socket options = TCP_NODELAY
+
+[Public]
+   path = /srv/samba/public
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = @hr, @sales, @it
+   force group = sambashare
+   create mask = 0660
+   directory mask = 0770
+
+[HR]
+   path = /srv/samba/hr
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = @hr
+   create mask = 0660
+   directory mask = 0770
+
+[Sales]
+   path = /srv/samba/sales
+   browseable = yes
+   read only = no
+   guest ok = no
+   valid users = @sales
+   create mask = 0660
+   directory mask = 0770
+
+[IT-Admin]
+   path = /srv/samba/it-admin
+   browseable = no
+   read only = no
+   guest ok = no
+   valid users = @it
+   create mask = 0660
+   directory mask = 0770
